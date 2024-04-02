@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="Login.css"> <!-- Assuming Login.css is in the same directory -->
+</head>
+<body>
+  <div class="admin-login-container">
+    <div class="login-form">
+      <h2>Admin Login</h2>
+      <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" id="email" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" class="form-control">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="handleLogin()">Login</button>
+    </div>
+  </div>
+
+  <script>
+    function handleLogin() {
+      // Predefined admin credentials
+      const adminEmail = 'thecrhcustomad2024@gmail.com';
+      const adminPassword = 'CrhCustom2024';
+
+      // Get entered email and password
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Check if entered email and password match predefined values
+      if (email === adminEmail && password === adminPassword) {
+        
+
+        window.location.href = '/admin-dashboard.html';
+        console.log('Admin login successful');
+      } else {
+        // If credentials do not match, show error message
+        console.error('Invalid email or password');
+      }
+    }
+  </script>
+</body>
+</html>

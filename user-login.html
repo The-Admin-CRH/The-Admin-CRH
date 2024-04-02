@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login</title>
+  <link rel="stylesheet" href="Login.css"> <!-- Assuming Login.css is in the same directory -->
+</head>
+<body>
+  <div class="user-login-container">
+    <div class="login-form">
+      <h2>User Login</h2>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" class="form-control">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="handleLogin()">Login</button>
+    </div>
+  </div>
+
+  <script>
+    function handleLogin() {
+      // Predefined user credentials
+      const predefinedUsername = 'CrhSales';
+      const predefinedPassword = 'CrhSales2024';
+
+      // Get entered username and password
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Check if entered username and password match predefined values
+      if (username === predefinedUsername && password === predefinedPassword) {
+        // If credentials match, navigate to user-dashboard page
+        window.location.href = '/user-dashboard.html';
+      } else {
+        // If credentials do not match, show error message
+        console.error('Invalid username or password');
+      }
+    }
+  </script>
+</body>
+</html>

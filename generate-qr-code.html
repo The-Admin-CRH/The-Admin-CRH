@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate QR Code</title>
+  <link rel="stylesheet" href="qrstyle.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <p>Enter the amount</p>
+      <input type="number" placeholder="Amount" id="qrnumber">
+
+      <div id="imgBox">
+        <img src="" id="qrImage">
+      </div>
+
+      <button onclick="generateQR()">Generate QR Code</button>
+      <button onclick="downloadQR()">Download QR Code</button>
+      
+    </div>
+
+    <script>
+
+      let imgBox = document.getElementById("imgBox");
+      let qrImage = document.getElementById("qrImage");
+      let qrnumber = document.getElementById("qrnumber");
+      
+      function generateQR(){
+        if(qrnumber.value.length > 0){
+        qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrnumber.value;
+        imgBox.classList.add("show-img");
+      }else{
+        qrnumber.classList.add('error');
+        setTimeout(()=>{
+          qrnumber.classList.remove('error');
+        },1000);
+      }
+    }
+
+    function downloadQR() {
+  if (qrImage.naturalWidth === 0) {
+    console.log("QR code not generated yet.");
+    return;
+  }
+
+  if (qrImage.src && qrImage.src !== "" && qrImage.src !== "about:blank") {
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", qrImage.src, true);
+    xhr.responseType = "blob";
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // Create a blob from the response
+        var blob = xhr.response;
+        // Create a URL for the blob
+        var url = window.URL.createObjectURL(blob);
+
+        // Create a temporary link element
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = "qrcode.png"; // Set the filename for the downloaded file
+
+        // Simulate a click on the link
+        document.body.appendChild(link);
+        link.click();
+
+        // Clean up
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      }
+    };
+
+    xhr.send();
+  }
+  else {
+    console.log("QR code not generated yet.");
+  }
+}
+
+
+    </script>
+    
+
+  </body>
+</html>

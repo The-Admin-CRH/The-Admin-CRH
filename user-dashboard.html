@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <!-- Include html5-qrcode library -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+  <div id="user-dashboard">
+    <h2>User Dashboard</h2>
+    <div id="reader"></div>
+  </div>
+
+  <script>
+    // Function to handle QR code scanning
+    function startQRCodeScanner() {
+      const qrboxWidth = 250;
+      const qrboxHeight = 250;
+      const scanner = new Html5QrcodeScanner(
+        'reader', // Element to render the scanner
+        {
+          qrbox: { width: qrboxWidth, height: qrboxHeight },
+          fps: 5,
+        },
+        // Callback for successful QR code scan
+        (result) => {
+          scanner.clear();
+          document.getElementById('user-dashboard').innerHTML += `
+            <div>Success: <a href="http://${result}">${result}</a></div>
+          `;
+        },
+        // Callback for error during scanning
+        (error) => {
+          console.warn(error);
+        }
+      );
+
+      scanner.render((error) => {
+        if (error) console.error('Failed to render scanner:', error);
+      });
+    }
+
+    // Call the function to start QR code scanning
+    startQRCodeScanner();
+  </script>
+</body>
+</html>
